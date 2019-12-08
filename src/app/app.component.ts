@@ -10,15 +10,26 @@ import { NectApiService } from "./nect-api.service";
 export class AppComponent {
   constructor(private NectApiService: NectApiService) {}
 
-  title = "nectapp";
+  disableCreateButton: boolean = false;
   identCases = new Array();
 
   createCase() {
-    this.NectApiService.getCaseId().then(response => {
+    this.disableCreateButton = true;
+
+    let elementIndex =
       this.identCases.push({
-        id: response,
-        status: "done"
+        id: "unknown",
+        status: "pending"
+      }) - 1;
+    this.NectApiService.getCaseId()
+      .then(response => {
+        this.identCases[elementIndex].id = response;
+        this.identCases[elementIndex].status = "done";
+        this.disableCreateButton = false;
+      })
+      .catch(err => {
+        this.identCases[elementIndex].status = "error";
+        this.disableCreateButton = false;
       });
-    });
   }
 }

@@ -1,3 +1,16 @@
-<p *ngFor="let identCase of identCases; let i = index">
-  Case #{{ i + 1 }}: {{ identCase.id }}, Status {{ identCase.status }}
-</p>
+<div class="identList">
+  <mat-card *ngFor="let identCase of identCases; let i = index">
+    Case #{{ i + 1 }}: {{ identCase.id }}
+    <mat-chip-list>
+      <mat-chip
+        [ngClass]="{
+          success: identCase.status === 'done',
+          pending: identCase.status === 'pending',
+          error: identCase.status === 'error'
+        }"
+      >
+        {{ identCase.status }}
+      </mat-chip>
+    </mat-chip-list>
+  </mat-card>
+</div>

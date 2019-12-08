@@ -1,0 +1,25 @@
+.identList {
+  margin-top: 20px;
+}
+
+mat-card {
+  margin-bottom: 5px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.success {
+  background: green;
+  color: white;
+}
+
+.pending {
+  background: lightskyblue;
+  color: white;
+}
+
+.error {
+  background: lightsalmon;
+  color: white;
+}

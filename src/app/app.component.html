@@ -1,4 +1,13 @@
-<h1>Ident Case Overwiev</h1>
-<button (click)="createCase()">Create Case</button>
+<div class="area">
+  <h1>Ident Case Overwiev</h1>
+  <button
+    [disabled]="disableCreateButton"
+    mat-flat-button
+    color="primary"
+    (click)="createCase()"
+  >
+    Create Case
+  </button>
 
-<app-ident-case [identCases]="identCases"></app-ident-case>
+  <app-ident-case [identCases]="identCases"></app-ident-case>
+</div>
