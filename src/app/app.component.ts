@@ -18,13 +18,12 @@ export class AppComponent {
 
     let elementIndex =
       this.identCases.push({
-        id: "unknown",
+        id: "",
         status: "pending"
       }) - 1;
     this.NectApiService.getCaseId()
       .then(response => {
         this.identCases[elementIndex].id = response;
-        this.identCases[elementIndex].status = "done";
         this.disableCreateButton = false;
       })
       .catch(err => {

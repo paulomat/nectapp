@@ -11,7 +11,8 @@ let body: any = {
     callback: "",
     jumpResponseURI: "www.google.de",
     lang: "de_DE",
-    intent: 2
+    intent: 2,
+    enableMock: true
   }
 };
 
@@ -30,6 +31,18 @@ export class NectApiService {
   async getCaseId() {
     return this.httpClient
       .post(BaseUrl + "sp/" + SP_UUID + "/cases/ ", body, options)
+      .toPromise();
+  }
+
+  async getCaseStatus(caseId: string) {
+    return this.httpClient
+      .get(BaseUrl + "sp/" + SP_UUID + "/cases/" + caseId, options)
+      .toPromise();
+  }
+
+  async getIdentData(caseId: string) {
+    return this.httpClient
+      .get(BaseUrl + "sp/" + SP_UUID + "/cases/" + caseId + "/data", options)
       .toPromise();
   }
 

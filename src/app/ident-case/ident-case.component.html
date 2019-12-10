@@ -1,6 +1,25 @@
 <div class="identList">
   <mat-card *ngFor="let identCase of identCases; let i = index">
-    Case #{{ i + 1 }}: {{ identCase.id }}
+    id: {{ identCase.id }}
+
+    <button
+      *ngIf="identCase.id"
+      (click)="getCaseStatus(identCase.id, i)"
+      mat-button
+      color="primary"
+    >
+      status
+    </button>
+
+    <button (click)="getIdentData(identCase.id, i)" mat-button color="primary">
+      data
+    </button>
+
+    <form action="https://test.jump.nect.com" method="get" target="_top">
+      <input type="hidden" name="case_uuid" [value]="identCase.id" />
+      <input type="hidden" name="redirect_url" value="www.google.de" />
+      <button mat-stroked-button color="primary">Do Identification</button>
+    </form>
     <mat-chip-list>
       <mat-chip
         [ngClass]="{

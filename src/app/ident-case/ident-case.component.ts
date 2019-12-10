@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
+import { NectApiService } from "../nect-api.service";
 
 @Component({
   selector: "app-ident-case",
@@ -11,7 +12,25 @@ export class IdentCaseComponent implements OnInit {
 
   @Input() identCases = new Array();
 
-  constructor() {}
+  constructor(private NectApiService: NectApiService) {}
 
   ngOnInit() {}
+
+  getCaseStatus(caseId: string, index: number) {
+    console.log(caseId);
+    console.log(index);
+    this.NectApiService.getCaseStatus(caseId)
+      .then(body => {
+        console.log(body);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  getIdentData(caseId: string, index: number) {
+    this.NectApiService.getIdentData(caseId).then(body => {
+      console.log(body);
+    });
+  }
 }
