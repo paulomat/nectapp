@@ -7,30 +7,36 @@ import { NectApiService } from "../nect-api.service";
   styleUrls: ["./ident-case.component.css"]
 })
 export class IdentCaseComponent implements OnInit {
-  public caseId: string;
-  public caseStatus: string;
-
-  @Input() identCases = new Array();
+  @Input() identCase;
 
   constructor(private NectApiService: NectApiService) {}
 
   ngOnInit() {}
 
-  getCaseStatus(caseId: string, index: number) {
-    console.log(caseId);
-    console.log(index);
-    this.NectApiService.getCaseStatus(caseId)
+  getCaseStatus() {
+    this.NectApiService.getCaseStatus(this.identCase.id)
       .then(body => {
         console.log(body);
+
+        let response = String.fromCharCode.apply(
+          null,
+          Array.from(new Uint32Array(body))
+        );
+        console.log(response);
+        this.identCase.status = response.state;
       })
       .catch(error => {
         console.log(error);
       });
   }
 
-  getIdentData(caseId: string, index: number) {
-    this.NectApiService.getIdentData(caseId).then(body => {
-      console.log(body);
-    });
+  getIdentData() {
+    this.NectApiService.getIdentData(this.identCase.id)
+      .then(body => {
+        console.log(body);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 }

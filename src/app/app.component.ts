@@ -21,6 +21,7 @@ export class AppComponent {
         id: "",
         status: "pending"
       }) - 1;
+
     this.NectApiService.getCaseId()
       .then(response => {
         this.identCases[elementIndex].id = response;

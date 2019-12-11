@@ -9,5 +9,8 @@
     Create Case
   </button>
 
-  <app-ident-case [identCases]="identCases"></app-ident-case>
+  <app-ident-case
+    *ngFor="let identCase of identCases"
+    [identCase]="identCase"
+  ></app-ident-case>
 </div>
